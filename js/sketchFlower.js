@@ -59,10 +59,7 @@ function draw() {
 
   
   background('#FFCC99');
-  text("HIT ENTER KET", 30, 30);
-  
-  text(counter, 10, 50);
-  text(countTrue, 10, 70);
+
   // draw the circle
   for(var i=0; i<MAX; i++){
     if(state[i]==1){
