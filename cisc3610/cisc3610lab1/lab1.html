@@ -1,0 +1,50 @@
+
+<html>
+ <head>
+  <meta charset="utf-8"/>
+
+  <style>
+  	canvas { border: 1px solid black; }
+  </style>
+
+ </head>
+ <body onload="draw();">
+   <canvas id="canvas" width="1000" height="1000"></canvas>
+   <script>
+   var w= 1000;
+var h= 1000;
+
+var fruit = [
+	{name:"Apple", quantity:20, color:"red"},
+	{name:"Orange", quantity:10, color:"orange"},
+  {name:"Banana", quantity:15, color:"yellow"},
+  {name:"Kiwi", quantity:3, color:"green"},
+  {name:"Blueburry", quantity:5, color:"blue"},
+  {name:"Grape", quantity:8, color:"purple"},
+];
+
+
+function draw() {
+  var canvas = document.getElementById('canvas');
+  if (canvas.getContext) {
+    var ctx = canvas.getContext('2d');
+
+    ctx.font = "30px Arial";
+    ctx.fillStyle='black';
+
+          var count = 0;
+          for (var i= 0; i<6; i++){
+          ctx.fillStyle= fruit[i].color;
+      ctx.fillRect(count,h-fruit[i].quantity*40,w/6,fruit[i].quantity*40);
+          
+            ctx.fillStyle='black';
+            ctx.fillText(fruit[i].quantity,count+70,w-50);
+            ctx.fillText(fruit[i].name,count+10,w-20)
+            count+= w/6;
+        }
+       
+  }
+}
+</script>
+ </body>
+</html>
