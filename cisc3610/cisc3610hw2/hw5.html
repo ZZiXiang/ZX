@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+ 
+<html>
+ <head>
+ <title>Zi Xiang Chen's animaiton hw</title>
+ </head>
+ <body>
+ 
+ <h1> Zi Xiang Chen Animation Homework </h1>
+ <canvas id='canvas' style="border:1px solid #d3d3d3;"></canvas><br />
+
+ <script>
+ var canvasWidth = 500; 
+ var canvasHeight = 500;
+ 
+ var spriteWidth = 624; 
+ var spriteHeight = 152; 
+ 
+ var rows = 1; 
+ var cols = 6; 
+ 
+ var trackRight = 0; 
+ var trackLeft = 1; 
+ 
+ var width = spriteWidth/cols; 
+ var height = spriteHeight/rows; 
+ 
+ var curFrame = 0; 
+ var frameCount = 6; 
+ 
+ var x=0;
+ var y=300; 
+ 
+ var srcX; 
+ var srcY; 
+ 
+
+
+ 
+ var canvas = document.getElementById('canvas');
+ canvas.width = canvasWidth;
+ canvas.height = canvasHeight; 
+ 
+ var ctx = canvas.getContext("2d");
+ 
+ var character = new Image(); 
+ character.src = "character5.png";
+ 
+ function updateFrame(){
+ curFrame = ++curFrame % frameCount; 
+ srcX = curFrame * width; 
+ ctx.clearRect(x,y,width,height); 
+ 
+ if(x<canvasWidth){
+ 	x+=10;
+ } else{
+ 	x=-30;
+ }
+
+ srcY = trackRight * height; 
+ 
+ }
+ 
+ function draw(){
+ updateFrame();
+ drawBackground();
+ ctx.drawImage(character,srcX,srcY,width,height,x,y,width,height);
+ drawBox();
+ }
+ 
+				 function drawBackground() {
+				var c = document.getElementById("canvas");
+				var ctx = c.getContext("2d");
+				  
+				  ctx.beginPath();
+				  ctx.fillStyle='#33ccff';
+				  ctx.fillRect(0,0,500,500);
+				  ctx.closePath();
+
+				ctx.beginPath();
+				  
+				  //draw grass 
+				ctx.fillStyle = '#66FF66';
+				ctx.rect(0, 300, 500, 300 );
+				ctx.fill();
+				  
+				  for(var j=500; j>300; j-=30){
+				    for(var i=15; i<500; i+=30){
+				        drawGrassAt (ctx,i,j);
+				    }   
+				  }
+				  
+				//draw mountain:
+				    ctx.fillStyle='green';
+				    ctx.beginPath();
+				    ctx.moveTo(0,300);
+				    ctx.lineTo(100,200);
+				    ctx.lineTo(200,300);
+				    ctx.lineTo(0,300);
+				    ctx.closePath();
+				    ctx.stroke();
+				    ctx.fill();
+				  
+				    ctx.beginPath();
+				    ctx.moveTo(100,300);
+				    ctx.lineTo(180,230);
+				    ctx.lineTo(250,300);
+				    ctx.lineTo(0,300);
+				    ctx.closePath();
+				    ctx.stroke();
+				    ctx.fill();
+				  
+				    ctx.beginPath();
+				    ctx.moveTo(230,300);
+				    ctx.lineTo(330,230);
+				    ctx.lineTo(400,300);
+				    ctx.lineTo(0,300);
+				    ctx.closePath();
+				    ctx.stroke();
+				    ctx.fill();
+				    
+				//draw sun:
+				  ctx.fillStyle='orange';
+				  ctx.beginPath();
+				  ctx.arc(100, 75, 50, 0, 2 * Math.PI);
+				  ctx.fill();
+				  
+				//draw cloud:
+				  
+				  ctx.fillStyle='white';
+				  ctx.beginPath();
+				  ctx.arc(100, 150, 30, 0, 2 * Math.PI);
+				  ctx.arc(130, 150, 30, 0, 2 * Math.PI);
+				  ctx.arc(160, 150, 30, 0, 2 * Math.PI);
+				  ctx.fill();
+
+				 // //draw house:
+				 //  ctx.fillStyle='gray';
+				 //  ctx.strokeStyle='gray';
+				 //  ctx.beginPath();
+				 //    ctx.moveTo(350,450);
+				 //    ctx.lineTo(350,350);
+				 //    ctx.lineTo(380,320);
+				 //    ctx.lineTo(410,350);
+				 //    ctx.lineTo(410,450);
+				 //    ctx.lineTo(350,450);
+				 //    // ctx.closePath();
+				 //    ctx.stroke();
+				 //    ctx.fill();
+				  
+				  // ctx.fillStyle='yellow';
+				  // ctx.beginPath();
+				  // ctx.arc(380, 370, 20, 0, 2 * Math.PI);
+				  // ctx.fill();
+				  
+				  // ctx.fillStyle='red';
+				  // ctx.beginPath();
+				  // ctx.fillRect(365, 400, 30,50);
+				  // ctx.fill();
+				  
+				  // //femce
+				  //   ctx.fillStyle='brown';
+				  // ctx.beginPath();
+				  // ctx.fillRect(320, 433, 120 ,5);
+				  // ctx.fill();
+				  
+				  // for(var q = 0; q< 13; q++){
+				  // drawFenceAt(ctx, 320+q*10 ,430);
+				  // }
+				}
+
+				function drawFenceAt (ctx,x,y){
+				  ctx.fillStyle ='brown';
+				  ctx.beginPath();
+				  ctx.fillRect(x,y,5,30);
+				  ctx.fill();
+				}
+				function drawGrassAt (ctx,x,y){
+				ctx.lineWidth = "5";
+				ctx.strokeStyle = "green"; // Green path
+
+				ctx.beginPath();
+				ctx.moveTo(x,y);
+				ctx.lineTo(x,y-20);
+				ctx.stroke(); // Draw it
+
+				ctx.beginPath();
+				ctx.moveTo(x,y);
+				ctx.lineTo(x-10,y-15);
+				ctx.stroke(); // Draw it
+				  
+				ctx.beginPath();
+				ctx.moveTo(x,y);
+				ctx.lineTo(x+10,y-15);
+				ctx.stroke(); // Draw it
+				}
+
+			function drawBox(){
+				  ctx.beginPath();
+				  ctx.fillStyle='#ffffcc';
+				  ctx.fillRect(x-30,y-80,100,70);
+				  ctx.closePath();
+
+				  ctx.beginPath();
+				  ctx.fillStyle='#ffffcc';
+				  ctx.moveTo(x-30+100-20,y-10);
+				  ctx.lineTo(x+100-30,y-10);
+				  ctx.lineTo(x-30+100-20,y+5); 				  
+				  ctx.fill();
+				  ctx.closePath();
+
+				ctx.fillStyle='#000000';
+				  ctx.font= "15px Arial";
+				  ctx.fillText("The world", x-25, y-60);
+				  ctx.fillText("itsn't flat.", x-25, y-40);
+			}
+ 
+
+ setInterval(draw,150);
+ 
+ </script>
+ </body>
+</html>
+ 
